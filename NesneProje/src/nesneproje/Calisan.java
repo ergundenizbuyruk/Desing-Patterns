@@ -4,12 +4,53 @@ package nesneproje;
  *
  * @author Ergun Deniz Buyruk
  */
-public interface Calisan {
+public abstract class Calisan {
     
-    public double maliyetHesapla();
+    private String adSoyad;
+    private int maas;
     
-    public void altindakileriListele();
+    public Calisan() {
+        adSoyad = "";
+        maas = 0;
+    }
     
-    public String toString();
+    public Calisan(String adSoyad, int maas) {
+        this.adSoyad = adSoyad;
+        this.maas = maas;
+    }
+    
+    /**
+     * @return the adSoyad
+     */
+    public String getAdSoyad() {
+        return adSoyad;
+    }
+
+    /**
+     * @param adSoyad the adSoyad to set
+     */
+    public void setAdSoyad(String adSoyad) {
+        this.adSoyad = adSoyad;
+    }
+
+    /**
+     * @return the maas
+     */
+    public int getMaas() {
+        return maas;
+    }
+
+    /**
+     * @param maas the maas to set
+     */
+    public void setMaas(int maas) {
+        this.maas = maas;
+    }
+    
+    public abstract double maliyetHesapla();
+    
+    public abstract void altindakileriListele();
+    
+    public abstract String toString();
     
 }

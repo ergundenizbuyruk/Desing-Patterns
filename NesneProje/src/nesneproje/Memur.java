@@ -4,7 +4,7 @@ package nesneproje;
  *
  * @author Ergun Deniz Buyruk
  */
-public class Memur implements Calisan{
+public class Memur extends Calisan{
 
     private String adSoyad;
     private int maas;
