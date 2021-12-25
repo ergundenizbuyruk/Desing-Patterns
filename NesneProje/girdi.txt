@@ -1,0 +1,3 @@
+D,Mustafa Turksever,5000,Root
+D,Halil Sengonca,4000,Mustafa Turksever
+D,Bahar Karaoglan,3500,Mustafa Turksever

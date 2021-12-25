@@ -15,7 +15,7 @@ public class FactoryProvider {
     * alıp uygun nesneleri ureten Fabrikayi çağır. Şimdilik veriyi başka bir 
     * yerden almayacagimiz icin baska fabrika yok.
     */
-    public static AbstractFactory getFactory(String factoryName){
+    public AbstractFactory getFactory(String factoryName){
         if ("metinFactory".equalsIgnoreCase(factoryName)) {
             return new MetinFactory();
         }

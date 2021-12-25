@@ -1,33 +1,65 @@
 package nesneproje;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
  * @author Ergun Deniz Buyruk
  */
-public class MetinFactory implements AbstractFactory {
+public class MetinFactory extends AbstractFactory {
     
     // daha sonra alacağı metni tutacak olan field.
-    private Scanner girdiMetni;
+    private BufferedReader reader;
+    private String[] calisanParcalari;
+    private MyIterator iterator;
 
-    public MetinFactory() {}
-    
-    // Fabrika oluştuktan sonra metni verebileceğimiz metot.
-    public void setMetin(Scanner girdiMetni) {
-        this.girdiMetni = girdiMetni;
+    public MetinFactory() {
+        calisanParcalari = new String[4];
     }
+    
     /*
-    * Metnin her satırını tek tek okuyup ilgili nesneyi nesneOlustur metodu
-    * ile olusturan metot.
+    * Fabrika olustulduktan sonra aldigi metin dosyasi yolu ile tum nesneleri
+    * olusturan ve ilgili Direktorun altina ekleyen metot.
+    * Metnin her satırını tek tek okuyup ilgili nesneyi calisanOlustur metodu
+    * ile olusturuyor. Bu metot IOException ve  FileNotFoundException
+    * firlatabilir. Main icerisinde bu Exception kontrol altinda tutulmalidir.
     */
-    private void metniOku() {
-        // pass
+    public void metindenCalisanOlustur(String dosyaYolu) 
+            throws IOException, FileNotFoundException{
+        
+        reader = new BufferedReader(new FileReader(dosyaYolu));
+        String satir;
+        
+        /*
+        * Verilen metnin satirin alip once ilgili nesne olustur. Daha sonra 
+        * iterator ile nesneyi uygun olan Direktorun altına ekle.
+        */
+        while ((satir = reader.readLine()) != null) {
+            
+            // Her satiri parcalara ayir.
+            calisanParcalari = satir.split(",");
+            
+            // Singleton ile root olup olmadigini kontrol et. Yoksa olustur.
+            Direktor rootDirektor = Singleton.getInstance(calisanParcalari[1], 
+                    Integer.parseInt(calisanParcalari[2]));
+            
+            // Calisan nesnesini olustur.
+            Calisan calisan = calisanOlustur(calisanParcalari[0], 
+                    calisanParcalari[1], Integer.parseInt(calisanParcalari[2]));
+            
+            // Iteratoru yarat.
+            iterator = rootDirektor.iterator();
+            
+            // Iterator sayesinde olusturulan metni Uygun Direktorun altina ekle.
+            iterator.bulVeEkle(calisan, calisanParcalari[3]);
+        }
     }
     
-    public Calisan nesneOlustur(String calisanTipi, String adSoyad, int maas) {
-        if ("D".equalsIgnoreCase(calisanTipi) 
-                || "Root".equalsIgnoreCase(calisanTipi)){
+    private Calisan calisanOlustur(String calisanTipi, String adSoyad, int maas) {
+        if ("D".equalsIgnoreCase(calisanTipi)) {
             return new Direktor(adSoyad, maas);
         } else if ("M".equalsIgnoreCase(calisanTipi)) {
             return new Memur(adSoyad, maas);

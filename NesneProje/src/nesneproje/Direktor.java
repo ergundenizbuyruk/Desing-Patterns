@@ -7,32 +7,33 @@ package nesneproje;
 public class Direktor extends Calisan {
 
     private Calisan[] emrindekilerListesi;
-    
+
     public Direktor() {
         super();
-        emrindekilerListesi = new Calisan[50];
+        emrindekilerListesi = new Calisan[20];
     }
-    
+
     public Direktor(String adSoyad, int maas, Calisan[] emrindekilerListesi) {
         super(adSoyad, maas);
         this.emrindekilerListesi = emrindekilerListesi;
     }
-    
+
     public Direktor(String adSoyad, int maas) {
         super(adSoyad, maas);
         this.emrindekilerListesi = new Calisan[50];
     }
+
     /**
      * @return the emrindekilerListesi
      */
     public Calisan[] getEmrindekilerListesi() {
         return emrindekilerListesi;
     }
-    
+
     public String getAdSoyad() {
         return super.getAdSoyad();
     }
-    
+
     public int getMaas() {
         return super.getMaas();
     }
@@ -43,15 +44,21 @@ public class Direktor extends Calisan {
     public void setEmrindekilerListesi(Calisan[] emrindekilerListesi) {
         this.emrindekilerListesi = emrindekilerListesi;
     }
-    
-    public void emrindekiListeyeEkle(Calisan calisan) {
-        int elemanSayisi = this.getEmrindekilerListesi().length;
-        this.getEmrindekilerListesi()[elemanSayisi] = calisan;
+
+    public void emrindekiListeyeEkle(Calisan eklenecekCalisan) {
+
+        int i = 0;
+        for (Calisan calisan : emrindekilerListesi) {
+            if (calisan == null && i == 0) {
+                calisan = eklenecekCalisan;
+                i++;
+            }
+        }
     }
-    
+
     @Override
     public String toString() {
-        return ("Direktorun Adı ve Soyadı: " + super.getAdSoyad() 
+        return ("Direktorun Adı ve Soyadı: " + super.getAdSoyad()
                 + " maasi: " + super.getMaas());
     }
 
@@ -67,16 +74,18 @@ public class Direktor extends Calisan {
     * memurun maliyetHesapla metodu çalışacaktır. 
     *
     * Memurun maliyeti sadece kendi maaşıdır.
-    */
+     */
     @Override
     public double maliyetHesapla() {
         int toplamMaliyet = super.getMaas();
         for (Calisan altindakiCalisan : emrindekilerListesi) {
-            toplamMaliyet += altindakiCalisan.maliyetHesapla();
+            if (altindakiCalisan != null) {
+                toplamMaliyet += altindakiCalisan.maliyetHesapla();
+            }
         }
         return toplamMaliyet;
     }
-    
+
     /*
     * ALtındakileri listelemek için once direktorun kendi bilgilerini
     * yazdım. Daha sonra altındakiler için tutmuş olduğu listeyi tek tek
@@ -87,52 +96,60 @@ public class Direktor extends Calisan {
     * çağırdım. Bu metot da once direktorun kendi adını sonra altındakileri yazacak.
     * Böylelikle Bir direktorun kendi adi ve altındaki tüm çalışanlar
     * ekrana yazılmış olacaktır.
-    */
+     */
     @Override
     public void altindakileriListele() {
         toString();
         for (Calisan altindakiCalisan : emrindekilerListesi) {
-            if (altindakiCalisan.getClass() == Direktor.class) {
-                altindakiCalisan.altindakileriListele();
-            } else{
-                System.out.println(altindakiCalisan.toString());
+            if (altindakiCalisan != null) {
+                if (altindakiCalisan.getClass() == Direktor.class) {
+                    Direktor direktorCalisan = (Direktor) altindakiCalisan;
+                    if (direktorCalisan.getEmrindekilerListesi() == null) {
+                        System.out.println(direktorCalisan);
+                    } else {
+                        direktorCalisan.altindakileriListele();
+                    }
+                } else {// altindakiCalisan Memur Demektir.
+                    System.out.println(altindakiCalisan.toString());
+                }
             }
+
         }
     }
-    
+
     // Iteratoru başlatan metot.
     public Iterator iterator() {
         return new Iterator();
     }
-    
+
     /* Sadece Direktor üzerinde açılabilen ve roottan başlayarak tum listeyi
     * gezmeyi sağlayan Iterator classı.
-    */
-    public class Iterator implements MyIterator{
+     */
+    public class Iterator implements MyIterator {
+
         private Calisan position;
-        
+
         // Iterotor ilk oluşturduğunda root olan direktörü referans göstersin.
         public Iterator() {
             position = Singleton.getInstance(getAdSoyad(), getMaas());
         }
-        
+
         /*
         * Her restart atıldığında root direktöre donsun.
-        */
+         */
         @Override
         public void restart() {
             position = Singleton.getInstance(getAdSoyad(), getMaas());
         }
-        
+
         /*
         * Emri altında bir çalışan olup olmadıgina bakan metot.
-        */
+         */
         @Override
         public boolean hasNext() {
             if (position.getClass() == Memur.class) {
                 return false;
-            } 
-            else{
+            } else {
                 Direktor positionDirektor = (Direktor) position;
                 if (positionDirektor.getEmrindekilerListesi() == null) {
                     return false;
@@ -140,43 +157,50 @@ public class Direktor extends Calisan {
                 return true;
             }
         }
-        
+
         // O anki çalışanın referansını dondersin.
         @Override
         public Calisan peek() {
             return position;
         }
-        
+
         /*
         * Bir sonraki Çalışana giden next metodu.
-        */
+         */
         @Override
         public void next() {
-            
+
         }
-        
+
         /*
         * Olustulan bir nesneyi hangi direktorun altında çalıştigini bulup
         * o direktorun listesine ekleyen metot.
-        */
+         */
         @Override
-        public boolean bulVeEkle(Calisan eklenecekCalisan, 
+        public boolean bulVeEkle(Calisan eklenecekCalisan,
                 String ustDirektorAdi) {
-            
             boolean bulunupEklendiMi = false;
             
-            restart();
-            Direktor rootPosition = (Direktor) position;
-            for (Calisan calisan : rootPosition.getEmrindekilerListesi()) {
-                if (calisan.getClass() == Direktor.class) {
-                    Direktor alttakiCalisan = (Direktor) calisan;
-                    if(alttakiCalisan.getAdSoyad()
-                            .equalsIgnoreCase(ustDirektorAdi)) {
-                        alttakiCalisan.emrindekiListeyeEkle(eklenecekCalisan);
-                        bulunupEklendiMi = true;
-                    } else {
-                        alttakiCalisan.iterator()
-                                .bulVeEkle(eklenecekCalisan, ustDirektorAdi);
+            // Eger root geldiyse bir yere ekleme.
+            if (ustDirektorAdi.equalsIgnoreCase("root")) {
+                bulunupEklendiMi = true;
+                
+            // Eger Roota eklenecekse Roota ekle.    
+            } else if (ustDirektorAdi.equalsIgnoreCase(Singleton.getInstance("", 0).getAdSoyad())) {
+                Singleton.getInstance("", 0).emrindekiListeyeEkle(eklenecekCalisan);
+                bulunupEklendiMi = true;
+            } else {
+                // Eger Root degil ve roota eklenmeyecekse roottan baslayarak
+                // her direktoru bul ve uygun olan direktorun altina ekle.
+                for (Calisan calisan : getEmrindekilerListesi()) {
+                    if (calisan != null && calisan.getClass() == Direktor.class) {
+                        Direktor altindakiCalisan = (Direktor) calisan;
+                        if (altindakiCalisan.getAdSoyad().equalsIgnoreCase(ustDirektorAdi)) {
+                            altindakiCalisan.emrindekiListeyeEkle(eklenecekCalisan);
+                            bulunupEklendiMi = true;
+                        } else {
+                            altindakiCalisan.iterator().bulVeEkle(eklenecekCalisan, ustDirektorAdi);
+                        }
                     }
                 }
             }

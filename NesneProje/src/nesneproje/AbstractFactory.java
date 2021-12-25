@@ -4,6 +4,6 @@ package nesneproje;
  *
  * @author Ergun Deniz Buyruk
  */
-public interface AbstractFactory {
+public abstract class AbstractFactory {
     
 }

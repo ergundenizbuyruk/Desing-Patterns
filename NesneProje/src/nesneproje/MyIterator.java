@@ -21,5 +21,4 @@ public interface MyIterator {
     
     public boolean bulVeEkle(Calisan eklenecekCalisan, 
                 String ustDirektorAdi);
-    
 }
