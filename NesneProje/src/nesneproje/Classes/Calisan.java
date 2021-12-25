@@ -1,24 +1,24 @@
-package nesneproje;
+package nesneproje.Classes;
 
 /**
  *
  * @author Ergun Deniz Buyruk
  */
-public class Memur extends Calisan{
-
+public abstract class Calisan {
+    
     private String adSoyad;
     private int maas;
     
-    public Memur() {
+    public Calisan() {
         adSoyad = "";
         maas = 0;
     }
     
-    public Memur(String adSoyad, int maas) {
+    public Calisan(String adSoyad, int maas) {
         this.adSoyad = adSoyad;
         this.maas = maas;
     }
-
+    
     /**
      * @return the adSoyad
      */
@@ -47,32 +47,10 @@ public class Memur extends Calisan{
         this.maas = maas;
     }
     
-    @Override
-    public String toString() {
-        return ("Memur Adı ve Soyadi: " + adSoyad + " Maaşı: " + maas);
-    }
-
-    /*
-    * Bir memurun maliyeti altında kimse olmadığı için kendi maliyeti kadardır.
-    */
-    @Override
-    public double maliyetHesapla() {
-        return maas;
-    }
+    public abstract double maliyetHesapla();
     
-    /*
-    * Once kendini yaz ve altında kimse olmadığını belirten bir String yaz.
-    */
-    @Override
-    public void altindakileriListele() {
-        toString();
-        System.out.println("Altında kimse yok.");
-    }
+    public abstract void altindakileriListele();
     
-    
-    
-    
-    
-    
+    public abstract String toString();
     
 }

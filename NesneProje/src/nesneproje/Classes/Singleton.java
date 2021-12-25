@@ -1,4 +1,6 @@
-package nesneproje;
+package nesneproje.Classes;
+
+import nesneproje.Classes.Direktor;
 
 /**
  *

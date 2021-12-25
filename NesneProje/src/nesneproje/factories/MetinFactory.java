@@ -1,9 +1,14 @@
-package nesneproje;
+package nesneproje.factories;
 
+import nesneproje.Classes.Memur;
+import nesneproje.Classes.Direktor;
+import nesneproje.Classes.Calisan;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import nesneproje.collections.MyIterator;
+import nesneproje.Classes.Singleton;
 
 /**
  *

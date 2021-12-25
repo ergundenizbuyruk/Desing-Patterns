@@ -1,5 +1,9 @@
 package nesneproje;
 
+import nesneproje.Classes.Singleton;
+import nesneproje.factories.MetinFactory;
+import nesneproje.factories.FactoryProvider;
+import nesneproje.Classes.Direktor;
 import java.io.IOException;
 
 /**

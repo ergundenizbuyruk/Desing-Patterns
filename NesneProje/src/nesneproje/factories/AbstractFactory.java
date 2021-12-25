@@ -1,4 +1,4 @@
-package nesneproje;
+package nesneproje.factories;
 
 /**
  *
