@@ -31,27 +31,15 @@ public class Main {
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        /*
+        
         Direktor rootDirektor = Singleton.getInstance("", 0);
         
-        System.out.println(rootDirektor);
-        for (Calisan a : rootDirektor.getEmrindekilerListesi()) {
-            System.out.println(a);
-        }
         
         System.out.println(rootDirektor.maliyetHesapla());
+       
         
-        for (Calisan a : rootDirektor.getEmrindekilerListesi()) {
-            System.out.println(a);
-        }
-        
-        
-        Calisan[] calisanlar = rootDirektor.getEmrindekilerListesi();
-        for (Calisan calisan : calisanlar) {
-            System.out.println(calisan);
-        }
         rootDirektor.altindakileriListele();
-        */
+        
         
     }
     

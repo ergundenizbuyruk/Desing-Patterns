@@ -51,7 +51,7 @@ public class MetinFactory extends AbstractFactory {
                     calisanParcalari[1], Integer.parseInt(calisanParcalari[2]));
             
             // Iteratoru yarat.
-            iterator = rootDirektor.iterator();
+            iterator = rootDirektor.getEmrindekilerListesi().iterator();
             
             // Iterator sayesinde olusturulan metni Uygun Direktorun altina ekle.
             iterator.bulVeEkle(calisan, calisanParcalari[3]);
