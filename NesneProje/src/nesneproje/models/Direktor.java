@@ -1,11 +1,7 @@
-package nesneproje.Classes;
+package nesneproje.models;
 
 import nesneproje.collections.MyCalisanList;
 
-/**
- *
- * @author Ergun Deniz Buyruk
- */
 public class Direktor extends Calisan {
 
     private MyCalisanList emrindekilerListesi;
@@ -41,8 +37,12 @@ public class Direktor extends Calisan {
 
     @Override
     public String toString() {
+        String rootMu = "";
+        if (getAdSoyad().equalsIgnoreCase(Singleton.getInstance("", 0).getAdSoyad())) {
+            rootMu = " (Root)";
+        }
         return ("Direktorun Adı ve Soyadı: " + super.getAdSoyad()
-                + " maasi: " + super.getMaas());
+                + " maasi: " + super.getMaas() + rootMu);
     }
 
     /*

@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package nesneproje.collections;
 
-import nesneproje.Classes.Direktor;
-import nesneproje.Classes.Calisan;
-import nesneproje.Classes.Singleton;
+import nesneproje.models.Direktor;
+import nesneproje.models.Calisan;
+import nesneproje.models.Singleton;
 
-/**
- *
- * @author Ergun Deniz Buyruk
- */
 public class MyCalisanList {
 
     private Calisan[] calisanListesi;
@@ -83,7 +74,7 @@ public class MyCalisanList {
         * Bir sonraki Çalışana giden next metodu.
          */
         @Override
-        public  void next() {
+        public void next() {
             if (hasNext()) {
                 head++;
             }
