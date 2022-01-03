@@ -47,6 +47,6 @@ public abstract class Calisan {
 
     public abstract void altindakileriListele();
 
+    @Override
     public abstract String toString();
-
 }
