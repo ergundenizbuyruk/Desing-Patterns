@@ -1,12 +1,12 @@
-D,Mustafa Turksever,6000,Root
-D,Halil Sengonca,4000,Mustafa Turksever
-D,Bahar Karaoglan,3500,Mustafa Turksever
-D,Ugur Guclu,2000,Halil Sengonca
-D,Sedat Tunc,3500,Halil Sengonca
-D,Oguz Demir,3000,Halil Sengonca
-M,Emre Kosar,700,Ugur Guclu
-M,Ahmet Egeli,700,Ugur Guclu
-M,Bora Kuzey,1000,Sedat Tunc
-M,Onder Bati,500,Oguz Demir
-M,Erdem Altin,500,Oguz Demir
-M,Mehmet Bilir,600,Oguz Demir
+D,Mustafa Turksever,3000,Root
+D,Halil Sengonca,3500,Mustafa
+D,Bahar Karaoglan,300,Mustafa
+D,Ugur Guclu,250,Halil
+D,Sedat Tunc,2500,Halil
+D,Oguz Demir,13000,Halil
+M,Emre Kosar,700,Ugur
+M,Ahmet Egeli,950,Ugur
+M,Bora Kuzey,700,Sedat
+M,Onder Bati,900,Oguz
+M,Erdem Altin,500,Oguz
+M,Mehmet Bilir,500,Oguz

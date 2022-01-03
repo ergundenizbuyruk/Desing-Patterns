@@ -6,46 +6,16 @@ public class Memur extends Calisan {
     private int maas;
 
     public Memur() {
-        adSoyad = "";
-        maas = 0;
+        super();
     }
 
     public Memur(String adSoyad, int maas) {
-        this.adSoyad = adSoyad;
-        this.maas = maas;
-    }
-
-    /**
-     * @return the adSoyad
-     */
-    public String getAdSoyad() {
-        return adSoyad;
-    }
-
-    /**
-     * @param adSoyad the adSoyad to set
-     */
-    public void setAdSoyad(String adSoyad) {
-        this.adSoyad = adSoyad;
-    }
-
-    /**
-     * @return the maas
-     */
-    public int getMaas() {
-        return maas;
-    }
-
-    /**
-     * @param maas the maas to set
-     */
-    public void setMaas(int maas) {
-        this.maas = maas;
+        super(adSoyad, maas);
     }
 
     @Override
     public String toString() {
-        return ("Memur Adı ve Soyadi: " + adSoyad + " Maaşı: " + maas);
+        return ("Memur Adı ve Soyadi: " + super.getAdSoyad() + " Maaşı: " + super.getMaas());
     }
 
     /*

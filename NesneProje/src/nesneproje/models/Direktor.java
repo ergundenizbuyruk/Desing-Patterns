@@ -22,13 +22,11 @@ public class Direktor extends Calisan {
     public MyCalisanList getEmrindekilerListesi() {
         return emrindekilerListesi;
     }
-
-    public String getAdSoyad() {
-        return super.getAdSoyad();
-    }
-
-    public int getMaas() {
-        return super.getMaas();
+    
+    public String getAd() {
+        String[] isimListesi = getAdSoyad().split(" ");
+        String ad = isimListesi[0];
+        return ad;
     }
 
     public void emrindekiListeyeEkle(Calisan eklenecekCalisan) {

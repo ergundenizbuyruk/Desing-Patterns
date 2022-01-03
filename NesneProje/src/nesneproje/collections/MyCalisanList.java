@@ -2,6 +2,7 @@ package nesneproje.collections;
 
 import nesneproje.models.Direktor;
 import nesneproje.models.Calisan;
+import nesneproje.models.Memur;
 import nesneproje.models.Singleton;
 
 public class MyCalisanList {
@@ -81,6 +82,36 @@ public class MyCalisanList {
         }
 
         /*
+         * Kendisine parametre olarak verilen ad-Soyad ile 
+        * Istenen calisanı bulup donderen metot.
+         */
+        @Override
+        public Calisan calisaniBul(String calisanAdSoyad) {
+            // Eger aranan root ise direkt root direktorunu donder.
+            if (calisanAdSoyad.equalsIgnoreCase(Singleton.
+                    getInstance("", 0).getAdSoyad())) {
+                return Singleton.getInstance("", 0);
+            } else {
+                /* Eger Root degilse Cagrılan listeden tum elemanlar tek tek
+                * gezilmesi gerekir. 
+                 */
+                for (Calisan calisan : getCalisanlarListesi()) {
+                    // Eger calisan aradığımız calisan ise donder.
+                    if (calisanAdSoyad.equalsIgnoreCase(calisan.getAdSoyad())) {
+                        return calisan;
+                    }
+                    // Eger calisan Direktor ise onun da altindaki calisanlari gez.
+                    else if (calisan.getClass() == Direktor.class) {
+                        Direktor alttakiCalisan = (Direktor) calisan;
+                        return alttakiCalisan.getEmrindekilerListesi()
+                                .iterator().calisaniBul(calisanAdSoyad);
+                    }
+                }
+            }
+            return null;
+        }
+
+        /*
         * Olustulan bir nesneyi hangi direktorun altında çalıştigini bulup
         * o direktorun listesine ekleyen metot.
          */
@@ -94,7 +125,7 @@ public class MyCalisanList {
                 bulunupEklendiMi = true;
 
                 // Eger Roota eklenecekse Roota ekle.    
-            } else if (ustDirektorAdi.equalsIgnoreCase(Singleton.getInstance("", 0).getAdSoyad())) {
+            } else if (ustDirektorAdi.equalsIgnoreCase(Singleton.getInstance("", 0).getAd())) {
                 Singleton.getInstance("", 0).emrindekiListeyeEkle(eklenecekCalisan);
                 bulunupEklendiMi = true;
             } else {
@@ -103,7 +134,7 @@ public class MyCalisanList {
                 for (Calisan calisan : getCalisanlarListesi()) {
                     if (calisan != null && calisan.getClass() == Direktor.class) {
                         Direktor altindakiCalisan = (Direktor) calisan;
-                        if (altindakiCalisan.getAdSoyad().equalsIgnoreCase(ustDirektorAdi)) {
+                        if (altindakiCalisan.getAd().equalsIgnoreCase(ustDirektorAdi)) {
                             altindakiCalisan.emrindekiListeyeEkle(eklenecekCalisan);
                             bulunupEklendiMi = true;
                         } else {

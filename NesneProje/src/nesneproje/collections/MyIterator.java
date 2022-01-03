@@ -15,6 +15,8 @@ public interface MyIterator {
     public Calisan peek();
 
     public void next();
+    
+    public Calisan calisaniBul(String calisanAdSoyad);
 
     public boolean bulVeEkle(Calisan eklenecekCalisan,
             String ustDirektorAdi);
