@@ -3,14 +3,14 @@ package nesneproje.models;
 public abstract class Calisan {
 
     private String adSoyad;
-    private int maas;
+    private double maas;
 
     public Calisan() {
         adSoyad = "";
         maas = 0;
     }
 
-    public Calisan(String adSoyad, int maas) {
+    public Calisan(String adSoyad, double maas) {
         this.adSoyad = adSoyad;
         this.maas = maas;
     }
@@ -32,14 +32,14 @@ public abstract class Calisan {
     /**
      * @return the maas
      */
-    public int getMaas() {
+    public double getMaas() {
         return maas;
     }
 
     /**
      * @param maas the maas to set
      */
-    public void setMaas(int maas) {
+    public void setMaas(double maas) {
         this.maas = maas;
     }
 

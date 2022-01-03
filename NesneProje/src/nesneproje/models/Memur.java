@@ -1,10 +1,6 @@
 package nesneproje.models;
 
 public class Memur extends Calisan {
-
-    private String adSoyad;
-    private int maas;
-
     public Memur() {
         super();
     }
@@ -23,7 +19,7 @@ public class Memur extends Calisan {
      */
     @Override
     public double maliyetHesapla() {
-        return maas;
+        return super.getMaas();
     }
 
     /*

@@ -2,7 +2,6 @@ package nesneproje.collections;
 
 import nesneproje.models.Direktor;
 import nesneproje.models.Calisan;
-import nesneproje.models.Memur;
 import nesneproje.models.Singleton;
 
 public class MyCalisanList {
@@ -93,22 +92,44 @@ public class MyCalisanList {
                 return Singleton.getInstance("", 0);
             } else {
                 /* Eger Root degilse Cagrılan listeden tum elemanlar tek tek
-                * gezilmesi gerekir. 
+                * gezilmesi gerekir. Ve eger listede bulunursa donderilir.
                  */
                 for (Calisan calisan : getCalisanlarListesi()) {
                     // Eger calisan aradığımız calisan ise donder.
-                    if (calisanAdSoyad.equalsIgnoreCase(calisan.getAdSoyad())) {
+                    if (calisan.getAdSoyad().equalsIgnoreCase(calisanAdSoyad)) {
                         return calisan;
                     }
-                    // Eger calisan Direktor ise onun da altindaki calisanlari gez.
-                    else if (calisan.getClass() == Direktor.class) {
-                        Direktor alttakiCalisan = (Direktor) calisan;
-                        return alttakiCalisan.getEmrindekilerListesi()
+                }
+
+                /*
+                * Eger listede bulunuzsa bir alt listeye inmemiz gerekir.
+                * Bu sebeple liste bir daha gezilir ve bulunan her direktor
+                * nesnesinin de altindaki calisanlara bakilir.
+                 */
+                for (Calisan calisan : getCalisanlarListesi()) {
+                    if (calisan.getClass() == Direktor.class) {
+                        Direktor altindakiCalisan = (Direktor) calisan; //Downcasting
+                        Calisan bulunanCalisan = altindakiCalisan.getEmrindekilerListesi()
                                 .iterator().calisaniBul(calisanAdSoyad);
+                        /*
+                        * Eger null gelirse hemen donderme cunku bir sonraki
+                        * direktorun altinda olabilir. Eger hemen null donderilirse
+                        * Metodumuz biter. Bu sebeple once null kontrolu yap.
+                        * Eger null degil ise gercektende bulunmus deyip donder ama 
+                        * null ise donderme.
+                         */
+                        if (bulunanCalisan != null) {
+                            return bulunanCalisan;
+                        }
                     }
                 }
-                return null;
             }
+            /*
+            * Eger metot buraya kadar gelmis ise calisanimiz gercekten de
+            * bulunamamis yani boyle bir calisan yok demektir. Bu sebeple 
+            * null donder.
+             */
+            return null;
         }
 
         /*
@@ -117,7 +138,8 @@ public class MyCalisanList {
          */
         @Override
         public boolean bulVeEkle(Calisan eklenecekCalisan,
-                String ustDirektorAdi) {
+                String ustDirektorAdi
+        ) {
             boolean bulunupEklendiMi = false;
 
             // Eger root geldiyse bir yere ekleme.

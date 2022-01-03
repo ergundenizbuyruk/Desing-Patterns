@@ -6,7 +6,7 @@ import nesneproje.factories.FactoryProvider;
 import nesneproje.models.Direktor;
 import java.io.IOException;
 import nesneproje.collections.MyIterator;
-import nesneproje.models.Memur;
+import nesneproje.models.Calisan;
 
 public class Deneme {
 
@@ -38,34 +38,39 @@ public class Deneme {
             System.out.println(e.getMessage());
         }
 
+        /* 
+        * Once Root direktorumuzu cagiralim ve onun uzerinde iteratorumuzu
+        * cagiralim.
+        */
         Direktor rootDirektor = Singleton.getInstance("", 0);
         MyIterator iterator = rootDirektor.getEmrindekilerListesi().iterator();
         
         /*
-        * Mustafa Turksever adli direktorun maliyetini hesapla ve 
-        * altindakileri listele.
+        * Dokumanda belirtildigi gibi Mustafa Turksever adli calisan olusturulup
+        * bu calisanin maliyeti ve altindakiler listelenmistir.
         */
-        Direktor MustafaTurksever = (Direktor) iterator.calisaniBul("Mustafa Turksever");
-        System.out.println("Mustafa Turksever' in maaliyeti : " 
-                + MustafaTurksever.maliyetHesapla()); 
-        
+        Calisan MustafaTurksever = iterator.calisaniBul("Mustafa Turksever");
+        System.out.println(MustafaTurksever.maliyetHesapla());
         MustafaTurksever.altindakileriListele();
         
-        /*
-        * Oguz Demir adli direktorun maliyetini hesapla ve 
-        * altindakileri listele.
-        */
-        Direktor OguzDemir = (Direktor) iterator.calisaniBul("Oguz Demir");
-        System.out.println("Oguz Demir' in maaliyeti : " 
-                + OguzDemir.maliyetHesapla()); 
+        System.out.println("\n-----------------------------------------\n");
         
+        /*
+        * Dokumanda belirtildigi gibi Oguz Demir adli calisan olusturulup
+        * bu calisanin maliyeti ve altindakiler listelenmistir.
+        */
+        Calisan OguzDemir = iterator.calisaniBul("Oguz Demir");
+        System.out.println(OguzDemir.maliyetHesapla());
         OguzDemir.altindakileriListele();
         
+        System.out.println("\n-----------------------------------------\n");
+        
         /*
-        * Ahmet Egeli adli memurun maliyetini hesapla.
+        * Dokumanda belirtildigi gibi Ahmet Egeli adli calisan olusturulup
+        * bu calisanin maliyeti ve altindakiler listelenmistir.
         */
-        Memur AhmetEgeli = (Memur) iterator.calisaniBul("Ahmet Egeli");
-        System.out.println("Ahmet Egeli' in maaliyeti : " 
-                + AhmetEgeli.maliyetHesapla()); 
+        Calisan AhmetEgeli = iterator.calisaniBul("Ahmet Egeli");
+        System.out.println(AhmetEgeli.maliyetHesapla());
+        AhmetEgeli.altindakileriListele();
     }
 }

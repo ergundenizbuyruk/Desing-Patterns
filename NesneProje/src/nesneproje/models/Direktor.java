@@ -11,7 +11,7 @@ public class Direktor extends Calisan {
         emrindekilerListesi = new MyCalisanList();
     }
 
-    public Direktor(String adSoyad, int maas) {
+    public Direktor(String adSoyad, double maas) {
         super(adSoyad, maas);
         this.emrindekilerListesi = new MyCalisanList();
     }
@@ -58,11 +58,9 @@ public class Direktor extends Calisan {
      */
     @Override
     public double maliyetHesapla() {
-        int toplamMaliyet = super.getMaas();
+        double toplamMaliyet = super.getMaas();
         for (Calisan altindakiCalisan : emrindekilerListesi.getCalisanlarListesi()) {
-            if (altindakiCalisan != null) {
-                toplamMaliyet += altindakiCalisan.maliyetHesapla();
-            }
+            toplamMaliyet += altindakiCalisan.maliyetHesapla();
         }
         return toplamMaliyet;
     }
