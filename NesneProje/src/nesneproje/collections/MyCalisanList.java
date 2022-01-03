@@ -107,8 +107,8 @@ public class MyCalisanList {
                                 .iterator().calisaniBul(calisanAdSoyad);
                     }
                 }
+                return null;
             }
-            return null;
         }
 
         /*
